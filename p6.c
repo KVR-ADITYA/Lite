@@ -22,9 +22,6 @@ int main(){
 		printf("Yes");
 	}
 	else{
-		for(int i=0;i<26;i++){
-			printf("%d\t",arr[i] );
-		}
 		printf("No\n");
 	}
 }
