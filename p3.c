@@ -12,10 +12,11 @@ void printll(ll*head){
 	ll* temp;
 	temp=head;
 	while(temp->next!=NULL){
-		printf("%d\t",temp->data);
+		if(temp->data)
+			printf("%d\t",temp->data);
 		temp=temp->next;
 	}
-	printf("%d\t",temp->data );
+	printf("%d\n",temp->data );
 	return;
 }
 void addnode(ll* hea,int val){
@@ -31,20 +32,27 @@ void addnode(ll* hea,int val){
 	return;
 }
 
-void reverse(ll** x){
-	ll *q,*r,*s ;
-	q=*x;
-	r=NULL;
-
-	while(q!=NULL){
-		s=r;
-		r=q;
-		q=q->next;
-		r->next = s;
-	}
-	*x = r;
-	return;
-}
+void reverse(ll** head_ref) 
+{ 
+    ll* prev   = NULL; 
+    ll* current = *head_ref; 
+    ll* next = NULL; 
+    while (current != NULL) 
+    { 
+        // Store next 
+        next  = current->next;   
+  
+        // Reverse current node's pointer 
+        current->next = prev;    
+  
+        // Move pointers one position ahead. 
+        prev = current; 
+        current = next; 
+    } 
+    *head_ref = prev; 
+    printll(*head_ref);
+} 
+  
 
 ll* shuffle(ll* head,int k){
 	ll*new_head = (ll*)malloc(sizeof(ll));
@@ -61,10 +69,12 @@ ll* shuffle(ll* head,int k){
 		temp = temp->next;
 		i++;
 	}
-	reverse(&temp);
-	ll* rev = temp;
-	printf("%p\n",rev->next);
-	while(rev->next!=NULL){
+	ll* tempdash = head;
+	reverse(&tempdash);
+	printll(tempdash);
+	ll* rev = tempdash;
+	// printf("%p\n",rev->next);
+	 while(rev->next!=NULL){
 		printf("HI\n");
 		if(rev->data!=0){
 			addnode(new_head,rev->data);
@@ -91,6 +101,7 @@ int main(int argc, char const *argv[])
 			addnode(head,a);
 		}
 	}
+	printll(head);
 	ll* new_head = shuffle(head,k);
 	printll(new_head);
 	return 0;
