@@ -73,8 +73,7 @@ ll* shuffle(ll* head,int k){
 	reverse(&tempdash);
 	printll(tempdash);
 	ll* rev = tempdash;
-	// printf("%p\n",rev->next);
-	 while(rev->next!=NULL){
+	while(rev->next!=NULL){
 		printf("HI\n");
 		if(rev->data!=0){
 			addnode(new_head,rev->data);
